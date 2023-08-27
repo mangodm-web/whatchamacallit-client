@@ -1,6 +1,9 @@
+import { useRouter } from "expo-router";
 import { SafeAreaView, Image, Text, View, Pressable } from "react-native";
 
 export default function WelcomeScreen() {
+  const router = useRouter();
+
   return (
     <SafeAreaView className="flex-1 flex justify-around p-4 bg-white">
       <View className="space-y-2">
@@ -19,7 +22,7 @@ export default function WelcomeScreen() {
         <Image source={require("../assets/logo.png")} className="w-72 h-72" />
       </View>
       <Pressable
-        onPress={() => {}}
+        onPress={() => router.push("/intro")}
         className="p-4 mx-5 bg-[#fdc365] rounded-xl"
       >
         <Text className="text-center text-lg text-gray-600 font-bold ">
