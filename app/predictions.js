@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, Pressable, SafeAreaView, Text, View } from "react-native";
 
@@ -9,6 +10,8 @@ export default function PredictionsScreen() {
   const [questionAnswers, setQuestionAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const router = useRouter();
 
   const recordingButtonImageSource = recording
     ? require("../assets/active-recording.gif")
@@ -44,7 +47,21 @@ export default function PredictionsScreen() {
                 className={`p-5 m-3 ${
                   rank < 4 ? "bg-[#fdc365]" : "bg-gray-200"
                 } rounded-xl`}
-                onPress={() => {}}
+                onPress={() => {
+                  let result = "error";
+
+                  if (rank <= 3) {
+                    result = "success";
+                  }
+
+                  router.push({
+                    pathname: "/results",
+                    params: { result },
+                  });
+
+                  setRecordedText("");
+                  setQuestionAnswers([]);
+                }}
               >
                 <Text className="text-gray-700 font-medium">{text}</Text>
               </Pressable>
