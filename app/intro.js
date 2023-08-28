@@ -1,4 +1,5 @@
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, Text, View, SafeAreaView, Pressable } from "react-native";
 
@@ -10,6 +11,8 @@ import { getRandomElements } from "../utils/getRandomElements";
 export default function IntroScreen() {
   const [welcomeMessage, setWelcomeMessage] = useState("");
   const [sampleQuestionAnswers, setSampleQuestionAnswers] = useState([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     const NUMBER_WELCOME_MESSAGES = 1;
@@ -61,7 +64,7 @@ export default function IntroScreen() {
         )}
         <View className="flex-row justify-center">
           <Pressable
-            onPress={() => {}}
+            onPress={() => router.push("/predictions")}
             className="w-40 p-4 mt-5 bg-gray-200 rounded-full"
           >
             <Text className="text-center">
