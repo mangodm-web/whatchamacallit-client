@@ -34,4 +34,21 @@ export const MESSAGES = {
       message: "Terrific! Why don't you do it again?",
     },
   ],
+  FEEDBACK_ASK_MESSAGE: [
+    {
+      id: 1,
+      message:
+        "We're still learning! \n Can you please tell me the word for this?",
+    },
+    {
+      id: 2,
+      message:
+        "We're constantly improving! \n Could you tell us the correct term?",
+    },
+    {
+      id: 3,
+      message:
+        "We're on a learning curve. \n Could you specify the right term?",
+    },
+  ],
 };
