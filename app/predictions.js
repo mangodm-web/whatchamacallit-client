@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Image, Pressable, SafeAreaView, Text, View } from "react-native";
 
 import { startRecording, stopRecording } from "../utils/audioRecorder";
+import { CONFIG } from "../constants/config";
 
 export default function PredictionsScreen() {
   const [recording, setRecording] = useState(undefined);
@@ -24,6 +25,37 @@ export default function PredictionsScreen() {
       }
     };
   }, []);
+
+  function handlePress(rank) {
+    const isToRouteToFeedback = rank === 5;
+    const result = rank <= 3 ? "success" : "error";
+    const pathname = isToRouteToFeedback ? "/feedback" : "/results";
+
+    const commonFeedback = {
+      description: recordedText,
+      modelPredictions: questionAnswers,
+      modelVersion: CONFIG.API_MODEL_LATEST_VERSION,
+    };
+
+    const feedback = isToRouteToFeedback
+      ? { ...commonFeedback, userInput: "", correctPredictionIndex: -1 }
+      : {
+          ...commonFeedback,
+          userInput: "",
+          correctPredictionIndex: rank <= SUCCESS_RANK ? rank : -1,
+        };
+
+    router.push({
+      pathname,
+      params: {
+        result,
+        feedback: JSON.stringify(feedback),
+      },
+    });
+
+    setRecordedText("");
+    setQuestionAnswers([]);
+  }
 
   return (
     <SafeAreaView className="flex-1 flex flex-col p-4 bg-white">
@@ -47,21 +79,7 @@ export default function PredictionsScreen() {
                 className={`p-5 m-3 ${
                   rank < 4 ? "bg-[#fdc365]" : "bg-gray-200"
                 } rounded-xl`}
-                onPress={() => {
-                  let result = "error";
-
-                  if (rank <= 3) {
-                    result = "success";
-                  }
-
-                  router.push({
-                    pathname: "/results",
-                    params: { result },
-                  });
-
-                  setRecordedText("");
-                  setQuestionAnswers([]);
-                }}
+                onPress={() => handlePress(rank)}
               >
                 <Text className="text-gray-700 font-medium">{text}</Text>
               </Pressable>
