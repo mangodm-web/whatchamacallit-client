@@ -51,4 +51,22 @@ export default class UnifiedApiHandler {
       throw error;
     }
   }
+
+  async createFeedback(feedback) {
+    try {
+      if (!feedback) {
+        throw new Error("Feedback is required.");
+      }
+
+      const response = await this.httpClient.post(
+        `/${CONFIG.API_MODEL_LATEST_VERSION}/predictions/feedback`,
+        feedback
+      );
+
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }
