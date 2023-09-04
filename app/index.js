@@ -19,7 +19,11 @@ export default function WelcomeScreen() {
         </Text>
       </View>
       <View className="flex-row justify-center">
-        <Image source={require("../assets/logo.png")} className="w-72 h-72" />
+        <Image
+          source={require("../assets/logo.png")}
+          className="w-72 h-72"
+          testID="logo-image"
+        />
       </View>
       <Pressable
         onPress={() => router.push("/intro")}
