@@ -49,6 +49,7 @@ export default function IntroScreen() {
           <Image
             source={require("../assets/bot.png")}
             className={"w-32 h-32 mt-3"}
+            testID="bot-image"
           />
         </View>
         <View className="space-y-2 p-3 mt-1 bg-white border border-slate-300 rounded-lg">
@@ -67,7 +68,7 @@ export default function IntroScreen() {
             onPress={() => router.push("/predictions")}
             className="w-40 p-4 mt-5 bg-gray-200 rounded-full"
           >
-            <Text className="text-center">
+            <Text className="text-center" testID="mic-icon">
               <FontAwesome5 name="microphone" size={24} color="black" />
             </Text>
           </Pressable>
