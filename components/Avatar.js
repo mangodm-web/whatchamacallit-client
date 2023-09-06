@@ -7,7 +7,7 @@ const DEFAULT_STYLES = "w-32 h-32 mt-3";
 function Avatar({ imageSrc = DEFAULT_IMAGE, styles = DEFAULT_STYLES }) {
   return (
     <View className="flex-row justify-center">
-      <Image source={imageSrc} className={styles} />
+      <Image source={imageSrc} className={styles} testID="avatar-image" />
     </View>
   );
 }
