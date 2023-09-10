@@ -12,6 +12,10 @@ export default class UnifiedApiHandler {
     });
   }
 
+  getHttpClient() {
+    return this.httpClient;
+  }
+
   async createTranscriptions(audio) {
     try {
       if (!audio) {
