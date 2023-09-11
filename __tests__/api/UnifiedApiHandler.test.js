@@ -22,7 +22,9 @@ describe("UnifiedApiHandler", () => {
   afterEach(() => mock.reset());
 
   it("should create a transcription", async () => {
-    const fakeTranscription = {
+    const fakeAudio = "fake audio";
+    const fakeTranscription = "fake transcription";
+    const fakeTranscriptionSuccessResponnse = {
       data: {
         transcription: "fake transcription",
       },
@@ -30,10 +32,10 @@ describe("UnifiedApiHandler", () => {
 
     mock
       .onPost(`/${CONFIG.API_STT_LATEST_VERSION}/transcriptions`)
-      .reply(200, fakeTranscription);
+      .reply(200, fakeTranscriptionSuccessResponnse);
 
-    const result = await apiHandler.createTranscriptions("fake audio");
-    expect(result).toBe("fake transcription");
+    const result = await apiHandler.createTranscriptions(fakeAudio);
+    expect(result).toBe(fakeTranscription);
   });
 
   it("should throw an error when audio is missing", async () => {
